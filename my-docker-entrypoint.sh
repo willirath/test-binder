@@ -1,7 +1,8 @@
 #!/bin/bash
-echo ernie > /etc/hostname
-echo /etc/hostname $(cat /etc/hostname)
-echo hostname $(hostname)
+
+# echo ernie > /etc/hostname
+# echo /etc/hostname $(cat /etc/hostname)
+# echo hostname $(hostname)
 
 if [ ! -f "/var/lib/mysql/ibdata1" ]; then
     echo "- Initializing database"
@@ -55,5 +56,8 @@ chown slurm:slurm /var/spool/slurmd /var/run/slurmd /var/lib/slurmd /var/log/slu
 echo "- Starting all Slurm processes under supervisord"
 /usr/bin/supervisord --configuration /etc/supervisord.conf
 
-su - ${NB_USER}
-exec "$@"
+echo before: $(whoami)
+
+# su - ${NB_USER}
+
+su - test bash -c 'exec "$@"'

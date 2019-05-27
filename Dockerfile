@@ -28,3 +28,5 @@ RUN echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 WORKDIR ${HOME}
 USER ${NB_USER}
+
+COPY *.ipynb ${HOME}/

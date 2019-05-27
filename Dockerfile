@@ -1,5 +1,7 @@
 FROM giovtorres/docker-centos7-slurm
 
+RUN yum install -y sudo
+
 RUN curl -o miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     bash miniconda.sh -f -b -p /opt/anaconda && \
     /opt/anaconda/bin/conda clean -tipy && \
@@ -20,4 +22,9 @@ ENV HOME /home/${NB_USER}
 RUN useradd -m --home-dir ${HOME} \
     --uid ${NB_UID} \
     ${NB_USER}
+
+RUN usermod -aG wheel ${NB_USER}
+RUN echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
 WORKDIR ${HOME}
+USER ${NB_USER}

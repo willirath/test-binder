@@ -8,6 +8,9 @@ ENV PATH /opt/anaconda/bin:$PATH
 
 RUN conda install --yes -c conda-forge python=3.6 dask distributed dask-jobqueue flake8 pytest docrep notebook
 
+COPY my-docker-entrypoint.sh /usr/local/bin/my-docker-entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/my-docker-entrypoint.sh"]
+
 # create user with a home directory
 ARG NB_USER
 ARG NB_UID
@@ -18,4 +21,3 @@ RUN useradd -m --home-dir ${HOME} \
     --uid ${NB_UID} \
     ${NB_USER}
 WORKDIR ${HOME}
-USER ${USER}

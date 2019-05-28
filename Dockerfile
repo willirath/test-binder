@@ -8,7 +8,7 @@ RUN curl -o miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-L
     rm -f miniconda.sh
 ENV PATH /opt/anaconda/bin:$PATH
 
-RUN conda install --yes -c conda-forge python=3.6 dask distributed dask-jobqueue flake8 pytest docrep notebook
+RUN conda install --yes -c conda-forge python=3.6 dask distributed dask-jobqueue docrep jupyterlab ipywidgets
 
 COPY my-docker-entrypoint.sh /usr/local/bin/my-docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/my-docker-entrypoint.sh"]
